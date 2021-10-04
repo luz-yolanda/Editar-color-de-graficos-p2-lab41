@@ -1,0 +1,85 @@
+---
+title: "Editar color de graficos p2 lab41"
+author: "Luz Yolanda Rivera"
+date: "10/4/2021"
+output: html_document
+---
+#instalando paquete con los datos
+#install.packages("gapminder")
+#install.packages("ggplot2")
+
+# cargar libreria ggplot2 y gapminder
+```{r}
+library(ggplot2)
+library(gapminder)
+```
+
+# cargando datos a entorno
+```{r}
+data("gapminder")
+
+```
+
+# filtrando por año 2007
+```{r}
+gapminder2007 <- gapminder[gapminder$year == '2007', ]
+```
+
+# instalar RColorBrewer
+#install.packages('RColorBrewer')
+# para ver las paletas
+```{r}
+library(RColorBrewer)
+display.brewer.all()
+```
+
+# Escala continua (variable continua)
+# haciendo grafica de puntos por poblacion
+```{r}
+  g3 <- ggplot(data = gapminder2007,
+               mapping = aes(x = gdpPercap,
+                             y = lifeExp,
+                             color = log(pop))) +
+    geom_point()
+```
+
+# Ver g3
+```{r}
+g3
+```
+
+# cambiando el color de los puntos segúnn gradiente
+```{r}
+g3 + scale_color_gradient(low= "blue", high = "red")
+```
+
+#cambiando el color de gradiante incluyendo blanco y punto medio
+```{r}
+g3 +  scale_color_gradient2(midpoint = 16, low = "blue", mid = "white", 
+                           high= "red", space = "Lab")
+```
+
+# haciendo boxplot en poblacion
+```{r}
+g4 <- ggplot(data = gapminder2007,
+             mapping = aes(x = lifeExp,
+                           fill = ..count..))+
+  geom_histogram()
+```
+
+# Ver g4
+```{r}
+g4
+```
+
+g4# cambiando color de barras histograma
+```{r}
+g4 + scale_fill_gradient(low = "blue",
+                         high = "red")
+```
+
+
+
+
+
+
